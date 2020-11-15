@@ -18,10 +18,10 @@ public class SectionRepositoryImpl implements SectionRepositoryCustom {
 	@Override
 	public Boolean updateSection(String sectionId, SectionPatchRequest request) {
 		Query query = new Query();
-        query.addCriteria(Criteria.where("_id").is(sectionId).and("seats.$.number").is(request.getSeatNumber()));
+        query.addCriteria(Criteria.where("_id").is(sectionId).and("seats.number").is(Integer.valueOf(request.getSeatNumber())));
         
         Update update = new Update();
-        update.addToSet("seats.$.available", request.getSeatStatus());
+        update.set("seats.$.available", request.getSeatStatus());
         
         UpdateResult updateResult = mongoTemplate.upsert(query, update, "sections");
         
