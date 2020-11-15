@@ -22,9 +22,17 @@ public class Play implements Serializable {
 	private String roomId;
 	private List<Price> prices;
 	
-	private class Price {
+	public class Price {
 		public String sectionId;
 		public Float price;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public Date getSchedule() {
@@ -61,14 +69,15 @@ public class Play implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Play [schedule=" + schedule + ", theaterId=" + theaterId + ", roomId=" + roomId + ", prices=" + prices
-				+ "]";
+		return "Play [id=" + id + ", schedule=" + schedule + ", theaterId=" + theaterId + ", roomId=" + roomId
+				+ ", prices=" + prices + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((prices == null) ? 0 : prices.hashCode());
 		result = prime * result + ((roomId == null) ? 0 : roomId.hashCode());
 		result = prime * result + ((schedule == null) ? 0 : schedule.hashCode());
@@ -85,6 +94,11 @@ public class Play implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Play other = (Play) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
 		if (prices == null) {
 			if (other.prices != null)
 				return false;

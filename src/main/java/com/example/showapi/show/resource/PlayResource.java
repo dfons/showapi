@@ -1,13 +1,13 @@
 package com.example.showapi.show.resource;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.hateoas.RepresentationModel;
+import com.example.showapi.show.domain.Play;
 
-import com.example.showapi.theater.domain.Seat;
-
-public class PlayResource extends RepresentationModel<PlayResource> {
+public class PlayResource {
 
 	private String id;
 	private Date schedule;
@@ -15,10 +15,23 @@ public class PlayResource extends RepresentationModel<PlayResource> {
 	private String roomId;
 	private List<PriceResource> prices;
 	
-	private class PriceResource {
-		public String sectionId;
-		public Float price;
-		public List<Seat> seats;
+	public static PlayResource toResource(Play entity) {
+		PlayResource resource = new PlayResource();
+		resource.setId(entity.getId());
+		resource.setSchedule(entity.getSchedule());
+		resource.setTheaterId(entity.getTheaterId());
+		resource.setRoomId(entity.getRoomId());
+		resource.setPrices(new ArrayList<>());
+		for (Play.Price price : entity.getPrices()) {
+			PriceResource priceResource = PriceResource.toResource(price);
+			resource.getPrices().add(priceResource);
+		}
+		return resource;
+	}
+	public static Collection<PlayResource> toResource(List<Play> entities) {
+		List<PlayResource> resources = new ArrayList<>();
+		entities.forEach(entity -> resources.add(toResource(entity)));
+		return resources;
 	}
 
 	public String getId() {

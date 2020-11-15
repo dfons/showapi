@@ -29,6 +29,8 @@ public class ShowController {
 
 	@Autowired
 	private ShowService showService;
+//	@Autowired
+//	private TheaterService theaterService;
 	
 	@GetMapping(path = "/{showId}", produces = { MediaType.SHOW_RESPONSE })
 	public ResponseEntity<ShowResource> getShowById( @PathVariable String showId ) throws Exception {
@@ -37,6 +39,13 @@ public class ShowController {
 			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 		}
 		final ShowResource response = ShowResource.toResource(show);
+		
+//		for (PlayResource play : response.getPlays()) {
+//			for (PriceResource price : play.getPrices()) {
+//				price.getSeats().addAll(theaterService.getSeatsBySection(price.getSectionId()));
+//			}
+//		}
+		
 	    return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 	

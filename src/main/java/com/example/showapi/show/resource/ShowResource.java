@@ -21,7 +21,7 @@ public class ShowResource extends RepresentationModel<ShowResource> {
 	private Integer duration;
 	private String description;
 	private List<String> cast;
-	private List<Play> plays;
+	private List<PlayResource> plays;
 	
 	public static ShowResource toResource(Show entity) {
 		ShowResource resource = new ShowResource();
@@ -31,7 +31,10 @@ public class ShowResource extends RepresentationModel<ShowResource> {
 		resource.setDuration(entity.getDuration());
 		resource.setDescription(entity.getDescription());
 		resource.setCast(entity.getCast());
-		resource.setPlays(entity.getPlays());
+		resource.setPlays(new ArrayList<>());
+		for (Play play : entity.getPlays()) {
+			resource.getPlays().add(PlayResource.toResource(play));
+		}
 		
 		Link selfRel = linkTo(ShowController.class).slash(entity.getId()).withSelfRel();
 		resource.add(selfRel);
@@ -80,10 +83,10 @@ public class ShowResource extends RepresentationModel<ShowResource> {
 		this.cast = cast;
 	}
 
-	public List<Play> getPlays() {
+	public List<PlayResource> getPlays() {
 		return plays;
 	}
-	public void setPlays(List<Play> plays) {
+	public void setPlays(List<PlayResource> plays) {
 		this.plays = plays;
 	}
 	

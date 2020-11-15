@@ -15,6 +15,7 @@ import com.example.showapi.theater.TheaterService;
 import com.example.showapi.theater.domain.Seat;
 import com.example.showapi.theater.domain.Section;
 import com.example.showapi.theater.domain.Theater;
+import com.example.showapi.theater.request.SectionPatchRequest;
 
 @Component
 public class TheaterServiceImpl implements TheaterService {
@@ -43,9 +44,30 @@ public class TheaterServiceImpl implements TheaterService {
 
 	@Override
 	public List<Seat> getSeatsBySection(String sectionId) {
-		logger.info("Looking for Section with ID {}", id);
+		logger.info("Looking for Seats on Section with ID {}", sectionId);
 		Section section = sectionRepository.getSectionById(sectionId);
 		return section.getSeats();
+	}
+
+	@Override
+	public Section getSectionById(String sectionId) {
+		logger.info("Looking for Section with ID {}", sectionId);
+		Section section = sectionRepository.getSectionById(sectionId);
+		return section;
+	}
+
+	@Override
+	public Page<Section> findAllSections(Pageable paging) {
+		logger.info("Looking for all Sections");
+		Page<Section> theaters= sectionRepository.findAll(paging);
+		return theaters;
+	}
+
+	@Override
+	public Boolean updateSection(String sectionId, SectionPatchRequest request) {
+		logger.info("Updating Seat with ID {} to status {} in Section with ID {}", request.getSeatNumber(), request.getSeatStatus(), sectionId);
+		Boolean result = sectionRepository.updateSection(sectionId, request);
+		return result;
 	}
 
 }
