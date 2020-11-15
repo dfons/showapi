@@ -1,0 +1,75 @@
+Theaters
+
+{
+    id: string,
+    name: string,
+    location: {
+        lat: float,
+        long: float
+    },
+    rooms: [
+        {
+            id: string,
+            name: string,
+            capacity: integer
+        }
+    ]
+}
+
+Shows
+
+{
+    id: string,
+    name: string,
+    genre: string,
+    duration: integer,
+    description: string,
+    cast: [
+        name: string
+    ],
+    plays: [
+        {
+            id: string,
+            schedule: date,
+            theaterId: string,
+            roomId: string
+            prices: [
+                {
+                    sectionId: string,
+                    price: float
+                }
+            ]
+        }
+    ]
+}
+
+Sections
+
+{
+    id: string,
+    seats: [
+        {
+            number: integer,
+            available: boolean
+        }
+    ]
+}
+
+Tickets
+
+{
+    id: string,
+    name: string,
+    dni: string,
+    timestamp: date,
+    show: {
+        showId: string,
+        playId: string,
+        seats: [
+            {
+                seatNumber: integer,
+                price: float
+            }
+        ]
+    }
+}
