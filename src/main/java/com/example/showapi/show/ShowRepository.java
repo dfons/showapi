@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import com.example.showapi.show.domain.Show;
 
-public interface ShowRepository extends MongoRepository<Show, String> {
+public interface ShowRepository extends MongoRepository<Show, String>, ShowRepositoryCustom {
 	
 	public Show getShowById( String id );
 	

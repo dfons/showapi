@@ -6,7 +6,7 @@ db.shows.insertMany([
         "plays": [
             {
                 "_id": "1",
-                "schedule": new Date("2020-11-15T15:00:00Z"),
+                "schedule": new ISODate("2020-11-15T15:00:00Z"),
                 "theaterId": "1",
                 "roomId": "2",
                 "prices": [
@@ -16,7 +16,7 @@ db.shows.insertMany([
             },
             {
                 "_id": "2",
-                "schedule": new Date("2020-11-15T20:00:00Z"),
+                "schedule": new ISODate("2020-11-15T20:00:00Z"),
                 "theaterId": "1",
                 "roomId": "1",
                 "prices": [
@@ -32,7 +32,7 @@ db.shows.insertMany([
         "plays": [
             {
                 "_id": "1",
-                "schedule": new Date("2020-11-15T14:00:00Z"),
+                "schedule": new ISODate("2020-11-15T14:00:00Z"),
                 "theaterId": "1",
                 "roomId": "1",
                 "prices": [
@@ -47,7 +47,7 @@ db.shows.insertMany([
         "plays": [
             {
                 "_id": "1",
-                "schedule": new Date("2020-11-15T15:00:00Z"),
+                "schedule": new ISODate("2020-11-15T15:00:00Z"),
                 "theaterId": "2",
                 "roomId": "1",
                 "prices": [
@@ -57,7 +57,7 @@ db.shows.insertMany([
             },
             {
                 "_id": "2",
-                "schedule": new Date("2020-11-15T20:00:00Z"),
+                "schedule": new ISODate("2020-11-15T20:00:00Z"),
                 "theaterId": "2",
                 "roomId": "2",
                 "prices": [
@@ -71,7 +71,7 @@ db.shows.insertMany([
         "plays": [
             {
                 "_id": "1",
-                "schedule": new Date("2020-11-15T16:00:00Z"),
+                "schedule": new ISODate("2020-11-15T16:00:00Z"),
                 "theaterId": "3",
                 "roomId": "1",
                 "prices": [
@@ -85,7 +85,7 @@ db.shows.insertMany([
         "plays": [
             {
                 "_id": "1",
-                "schedule": new Date("2020-11-15T20:00:00Z"),
+                "schedule": new ISODate("2020-11-15T20:00:00Z"),
                 "theaterId": "2",
                 "roomId": "1",
                 "prices": [
@@ -192,5 +192,29 @@ db.sections.insertMany([
             { "number": 1, "available": true }, { "number": 2, "available": true }, { "number": 3, "available": true }, { "number": 4, "available": true }, { "number": 5, "available": true },
             { "number": 6, "available": true }, { "number": 7, "available": true }, { "number": 8, "available": true }, { "number": 9, "available": true }, { "number": 10, "available": true }
         ]
+    }
+]);
+
+db.sections2.drop();
+db.sections2.insertMany([
+    {
+        "_id": "1",
+        "seats": { 
+            "1": true,
+            "2": true,
+            "3": true,
+            "4": true,
+            "5": true
+        }
+    },
+    {
+        "_id": "2",
+        "seats": {
+            "6": true,
+            "7": true,
+            "8": true,
+            "9": true,
+            "10": true
+        }
     }
 ]);

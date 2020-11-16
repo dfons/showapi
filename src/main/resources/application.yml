@@ -1,0 +1,54 @@
+management:
+  server:
+    port: 8080
+  endpoints:
+    web:
+      base-path: /management
+      exposure:
+        include: "*" # Expose all management endpoints
+  metrics:
+    enable:
+      jvm: true
+
+server:
+  port: 8080
+  servlet:
+    context-path: /
+    application-display-name: showapi
+  compression:
+    enabled: true
+    min-response-size: 1024
+    mime-types:
+    - application/json
+  tomcat:
+    threads:
+      max: 0
+      min-spare: 0
+    uri-encoding: UTF-8
+    remoteip:
+      remote-ip-header: X-FORWARDED-FOR
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: showapi
+  #cache:
+  #  type: hazelcast
+  #hazelcast:
+  #  config: classpath:config/hazelcast-dev.xml
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/showapi
+      #username:
+      #password:
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui-custom.html
+
+logging:
+  level:
+    ROOT: INFO
+    org:
+      springframework: DEBUG

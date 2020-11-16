@@ -9,11 +9,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
+import com.example.showapi.theater.Section2Repository;
 import com.example.showapi.theater.SectionRepository;
 import com.example.showapi.theater.TheaterRepository;
 import com.example.showapi.theater.TheaterService;
 import com.example.showapi.theater.domain.Seat;
 import com.example.showapi.theater.domain.Section;
+import com.example.showapi.theater.domain.Section2;
 import com.example.showapi.theater.domain.Theater;
 import com.example.showapi.theater.request.SectionPatchRequest;
 
@@ -27,6 +29,9 @@ public class TheaterServiceImpl implements TheaterService {
 	
 	@Autowired
 	private SectionRepository sectionRepository;
+	
+	@Autowired
+	private Section2Repository section2Repository;
 	
 	@Override
 	public Theater getById(String id) {
@@ -67,6 +72,27 @@ public class TheaterServiceImpl implements TheaterService {
 	public Boolean updateSection(String sectionId, SectionPatchRequest request) {
 		logger.info("Updating Seat with ID {} to status {} in Section with ID {}", request.getSeatNumber(), request.getSeatStatus(), sectionId);
 		Boolean result = sectionRepository.updateSection(sectionId, request);
+		return result;
+	}
+
+	@Override
+	public Section2 getSection2ById(String sectionId) {
+		logger.info("Looking for Section2 with ID {}", sectionId);
+		Section2 section = section2Repository.getSectionById(sectionId);
+		return section;
+	}
+
+	@Override
+	public Page<Section2> findAllSections2(Pageable paging) {
+		logger.info("Looking for all Sections2");
+		Page<Section2> sections= section2Repository.findAll(paging);
+		return sections;
+	}
+
+	@Override
+	public Boolean updateSection2(String sectionId, SectionPatchRequest request) {
+		logger.info("Updating Seat with ID {} to status {} in Section2 with ID {}", request.getSeatNumber(), request.getSeatStatus(), sectionId);
+		Boolean result = section2Repository.updateSection(sectionId, request);
 		return result;
 	}
 

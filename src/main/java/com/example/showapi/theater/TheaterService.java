@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 
 import com.example.showapi.theater.domain.Seat;
 import com.example.showapi.theater.domain.Section;
+import com.example.showapi.theater.domain.Section2;
 import com.example.showapi.theater.domain.Theater;
 import com.example.showapi.theater.request.SectionPatchRequest;
 
@@ -23,5 +24,12 @@ public interface TheaterService {
 	public Page<Section> findAllSections( Pageable paging );
 	
 	public Boolean updateSection( String sectionId, SectionPatchRequest request );
+	
+	// New Section2.
+	public Section2 getSection2ById( String sectionId );
+	
+	public Page<Section2> findAllSections2( Pageable paging );
+	
+	public Boolean updateSection2( String sectionId, SectionPatchRequest request );
 	
 }
