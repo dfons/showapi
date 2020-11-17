@@ -199,22 +199,46 @@ db.sections2.drop();
 db.sections2.insertMany([
     {
         "_id": "1",
-        "seats": { 
-            "1": true,
-            "2": true,
-            "3": true,
-            "4": true,
-            "5": true
-        }
+        "seats": { "1": true, "2": true, "3": true, "4": true, "5": true }
     },
     {
         "_id": "2",
-        "seats": {
-            "6": true,
-            "7": true,
-            "8": true,
-            "9": true,
-            "10": true
-        }
+        "seats": { "6": true, "7": true, "8": true, "9": true, "10": true }
+    },
+    {
+        "_id": "3",
+        "seats": { "1": true, "2": true, "3": true, "4": true, "5": true }
+    },
+    {
+        "_id": "4",
+        "seats": { "6": true, "7": true, "8": true, "9": true, "10": true }
+    },
+    {
+        "_id": "5",
+        "seats": { "11": true, "12": true, "13": true, "14": true, "15": true, "16": true, "17": true, "18": true, "19": true, "20": true }
+    },
+    {
+        "_id": "6",
+        "seats": { "1": true, "2": true, "3": true, "4": true, "5": true, "6": true, "7": true, "8": true, "9": true, "10": true }
+    },
+    {
+        "_id": "7",
+        "seats": { "11": true, "12": true, "13": true, "14": true, "15": true, "16": true, "17": true, "18": true, "19": true, "20": true }
+    },
+    {
+        "_id": "8",
+        "seats": { "1": true, "2": true, "3": true, "4": true, "5": true }
+    },
+    {
+        "_id": "9",
+        "seats": { "6": true, "7": true, "8": true, "9": true, "10": true }
+    },
+    {
+        "_id": "10",
+        "seats": { "1": true, "2": true, "3": true, "4": true, "5": true }
+    },
+    {
+        "_id": "11",
+        "seats": { "1": true, "2": true, "3": true, "4": true, "5": true, "6": true, "7": true, "8": true, "9": true, "10": true }
     }
 ]);
