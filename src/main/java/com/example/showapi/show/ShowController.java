@@ -74,11 +74,12 @@ public class ShowController {
 	
 	@GetMapping(path = "/find", produces = { MediaType.PAGED_SHOW_RESPONSE })
 	public ResponseEntity<PagedModel<ShowResource>> findShows(@RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "10") int size, @RequestParam String dateFrom, @RequestParam String dateTo) throws Exception {
+			@RequestParam(defaultValue = "10") int size, @RequestParam(required = false) String dateFrom, @RequestParam(required = false) String dateTo,
+			@RequestParam(required = false) String priceFrom, @RequestParam(required = false) String priceTo) throws Exception {
 		Pageable paging = PageRequest.of(page, size);
 		
 		// Get shows
-		Page<Show> pagedShows = this.showService.findAllByDate(paging, dateFrom, dateTo);
+		Page<Show> pagedShows = this.showService.findAllByDate(paging, dateFrom, dateTo, priceFrom, priceTo);
 	    // Build Page Resources
 	    Link selfLink = linkTo(ShowController.class).withSelfRel();
 	    PageMetadata metadata = new PageMetadata(pagedShows.getSize(),

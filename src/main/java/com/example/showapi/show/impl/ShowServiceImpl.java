@@ -42,17 +42,20 @@ public class ShowServiceImpl implements ShowService {
 	}
 
 	@Override
-	public Page<Show> findAllByDate(Pageable paging, String dateFrom, String dateTo) throws ParseException {
+	public Page<Show> findAllByDate(Pageable paging, String dateFrom, String dateTo, String priceFrom, String priceTo) throws ParseException {
 		DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 	    
-	    logger.info("The strings: {} and {}", dateFrom, dateTo);
-
-		Date from = inputFormat.parse(dateFrom);
-		Date to = inputFormat.parse(dateTo);
-		
+	    logger.info("The date strings: {} and {}", dateFrom, dateTo);
+		Date from = (dateFrom != null && !dateFrom.isEmpty()) ? inputFormat.parse(dateFrom) : null;
+		Date to = (dateFrom != null && !dateFrom.isEmpty()) ? inputFormat.parse(dateTo) : null;
 		logger.info("The dates: {} and {}", from, to);
 		
-		Page<Show> shows = showRepository.findByDate(paging, from, to);
+		logger.info("The price strings: {} and {}", priceFrom, priceTo);
+		Float priceA = (priceFrom != null && !priceFrom.isEmpty()) ? Float.valueOf(priceFrom) : null;
+		Float priceB = (priceTo != null && !priceTo.isEmpty()) ? Float.valueOf(priceTo) : null;
+		logger.info("The prices: {} and {}", from, to);
+		
+		Page<Show> shows = showRepository.findByDate(paging, from, to, priceA, priceB);
 		
 		return shows;
 	}

@@ -1,5 +1,6 @@
 package com.example.showapi.show.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -25,9 +28,31 @@ public class ShowRepositoryImpl implements ShowRepositoryCustom {
 	protected MongoTemplate mongoTemplate;
 	
 	@Override
-	public Page<Show> findByDate(Pageable paging, Date fromDate, Date dateTo) {
+	public Page<Show> findByDate(Pageable paging, Date dateFrom, Date dateTo, Float priceFrom, Float priceTo) {
 		Query query = new Query();
-        query.addCriteria(Criteria.where("plays.schedule").gte(fromDate).lte(dateTo));
+		Criteria criteria = new Criteria();
+//        query.addCriteria(Criteria.where("plays.schedule").gte(dateFrom).lte(dateTo));
+//        
+//        List<Show> shows = mongoTemplate.find(query, Show.class, "shows");
+//        
+//        int start = (int)paging.getOffset();
+//        int end = (start + paging.getPageSize()) > shows.size() ? shows.size() : (start + paging.getPageSize());
+//        Page<Show> pages = new PageImpl<Show>(shows.subList(start, end), paging, shows.size());
+//        
+//        return pages;
+        
+        
+        List<Criteria> criterias = new ArrayList<>();
+        if(dateFrom != null && dateTo != null) {
+        	criterias.add(Criteria.where("plays.schedule").gte(dateFrom).lte(dateTo));
+        }
+        if(priceFrom != null && priceTo != null) {
+        	criterias.add(Criteria.where("plays.prices.price").gte(priceFrom).lte(priceTo));
+        }
+        if(criterias.size() > 0) {
+        	criteria.andOperator(criterias.toArray(new Criteria[criterias.size()]));
+        }
+        query.addCriteria(criteria).with(Sort.by(Direction.ASC, "plays.schedule"));
         
         List<Show> shows = mongoTemplate.find(query, Show.class, "shows");
         
