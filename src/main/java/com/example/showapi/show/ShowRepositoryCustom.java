@@ -9,6 +9,7 @@ import com.example.showapi.show.domain.Show;
 
 public interface ShowRepositoryCustom {
 
-	public Page<Show> findByDate(Pageable paging, Date dateFrom, Date dateTo, Float priceFrom, Float priceTo);
+	public Page<Show> findByDate(Pageable paging, Date dateFrom, Date dateTo, Float priceFrom, Float priceTo,
+			String sortBy, String order);
 	
 }

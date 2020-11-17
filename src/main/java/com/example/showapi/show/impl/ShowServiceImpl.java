@@ -4,20 +4,17 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.TimeZone;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.format.datetime.DateFormatter;
 import org.springframework.stereotype.Component;
 
 import com.example.showapi.show.ShowRepository;
 import com.example.showapi.show.ShowService;
 import com.example.showapi.show.domain.Show;
-import com.fasterxml.jackson.databind.util.StdDateFormat;
 
 @Component
 public class ShowServiceImpl implements ShowService {
@@ -42,7 +39,7 @@ public class ShowServiceImpl implements ShowService {
 	}
 
 	@Override
-	public Page<Show> findAllByDate(Pageable paging, String dateFrom, String dateTo, String priceFrom, String priceTo) throws ParseException {
+	public Page<Show> findAllByDate(Pageable paging, String dateFrom, String dateTo, String priceFrom, String priceTo, String sortBy, String order) throws ParseException {
 		DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 	    
 	    logger.info("The date strings: {} and {}", dateFrom, dateTo);
@@ -53,11 +50,21 @@ public class ShowServiceImpl implements ShowService {
 		logger.info("The price strings: {} and {}", priceFrom, priceTo);
 		Float priceA = (priceFrom != null && !priceFrom.isEmpty()) ? Float.valueOf(priceFrom) : null;
 		Float priceB = (priceTo != null && !priceTo.isEmpty()) ? Float.valueOf(priceTo) : null;
-		logger.info("The prices: {} and {}", from, to);
+		logger.info("The prices: {} and {}", priceA, priceB);
 		
-		Page<Show> shows = showRepository.findByDate(paging, from, to, priceA, priceB);
+		logger.info("The sort strings: {} and {}", sortBy, order);
+		
+		Page<Show> shows = showRepository.findByDate(paging, from, to, priceA, priceB, sortBy, order);
 		
 		return shows;
+	}
+
+	/**
+	 * The type OrderType.
+	 */
+	public final static class OrderType {
+		public static final String ASC = "asc";
+		public static final String DESC = "desc";
 	}
 
 }

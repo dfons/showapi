@@ -2,10 +2,6 @@ package com.example.showapi.show;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
-import java.util.Date;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.showapi.show.domain.Show;
-import com.example.showapi.show.impl.ShowServiceImpl;
 import com.example.showapi.show.resource.ShowResource;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -74,12 +69,18 @@ public class ShowController {
 	
 	@GetMapping(path = "/find", produces = { MediaType.PAGED_SHOW_RESPONSE })
 	public ResponseEntity<PagedModel<ShowResource>> findShows(@RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "10") int size, @RequestParam(required = false) String dateFrom, @RequestParam(required = false) String dateTo,
-			@RequestParam(required = false) String priceFrom, @RequestParam(required = false) String priceTo) throws Exception {
+			@RequestParam(defaultValue = "10") int size, @RequestParam(required = false) String dateFrom,
+			@RequestParam(required = false) String dateTo, @RequestParam(required = false) String priceFrom,
+			@RequestParam(required = false) String priceTo, @RequestParam(required = false) String sortBy,
+			@RequestParam(required = false) String order) throws Exception {
+		if (order != null && !order.equals("asc") && !order.equals("desc")) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
 		Pageable paging = PageRequest.of(page, size);
 		
 		// Get shows
-		Page<Show> pagedShows = this.showService.findAllByDate(paging, dateFrom, dateTo, priceFrom, priceTo);
+		Page<Show> pagedShows = this.showService.findAllByDate(paging, dateFrom, dateTo, priceFrom, priceTo, sortBy,
+				order);
 	    // Build Page Resources
 	    Link selfLink = linkTo(ShowController.class).withSelfRel();
 	    PageMetadata metadata = new PageMetadata(pagedShows.getSize(),

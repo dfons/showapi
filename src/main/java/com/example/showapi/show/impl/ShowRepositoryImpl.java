@@ -28,19 +28,10 @@ public class ShowRepositoryImpl implements ShowRepositoryCustom {
 	protected MongoTemplate mongoTemplate;
 	
 	@Override
-	public Page<Show> findByDate(Pageable paging, Date dateFrom, Date dateTo, Float priceFrom, Float priceTo) {
+	public Page<Show> findByDate(Pageable paging, Date dateFrom, Date dateTo, Float priceFrom, Float priceTo,
+			String sortBy, String order) {
 		Query query = new Query();
 		Criteria criteria = new Criteria();
-//        query.addCriteria(Criteria.where("plays.schedule").gte(dateFrom).lte(dateTo));
-//        
-//        List<Show> shows = mongoTemplate.find(query, Show.class, "shows");
-//        
-//        int start = (int)paging.getOffset();
-//        int end = (start + paging.getPageSize()) > shows.size() ? shows.size() : (start + paging.getPageSize());
-//        Page<Show> pages = new PageImpl<Show>(shows.subList(start, end), paging, shows.size());
-//        
-//        return pages;
-        
         
         List<Criteria> criterias = new ArrayList<>();
         if(dateFrom != null && dateTo != null) {
@@ -52,7 +43,13 @@ public class ShowRepositoryImpl implements ShowRepositoryCustom {
         if(criterias.size() > 0) {
         	criteria.andOperator(criterias.toArray(new Criteria[criterias.size()]));
         }
-        query.addCriteria(criteria).with(Sort.by(Direction.ASC, "plays.schedule"));
+        
+        query.addCriteria(criteria);
+        
+		// If sortBy is defined, order is assumed ASC in case it is not defined.
+		if (sortBy != null && !sortBy.isEmpty()) {
+			query.with(Sort.by((order != null && order.equals("desc")) ? Direction.DESC : Direction.ASC, sortBy));
+        }
         
         List<Show> shows = mongoTemplate.find(query, Show.class, "shows");
         

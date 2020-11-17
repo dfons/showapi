@@ -13,6 +13,7 @@ public interface ShowService {
 	
 	public Page<Show> findAll( Pageable paging );
 	
-	public Page<Show> findAllByDate( Pageable paging, String dateFrom, String dateTo, String priceFrom, String priceTo ) throws ParseException;
+	public Page<Show> findAllByDate(Pageable paging, String dateFrom, String dateTo, String priceFrom, String priceTo,
+			String sortBy, String order) throws ParseException;
 	
 }
