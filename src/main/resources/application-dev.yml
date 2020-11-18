@@ -39,8 +39,7 @@ spring:
   #  config: classpath:config/hazelcast-dev.xml
   data:
     mongodb:
-      #uri: mongodb://localhost:27017/showapi
-      uri: mongodb+srv://dfons:HOWIXEggnn7SY1zS@cluster0.xfkqt.mongodb.net/showapi?retryWrites=true&w=majority
+      uri: mongodb://localhost:27017/showapi
       #username:
       #password:
 
