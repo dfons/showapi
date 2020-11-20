@@ -1,0 +1,20 @@
+{
+    "_id": "1", "name": "Big Theater", "address": "Street 1 #123, north",
+    "rooms": [
+        { "_id": "1", "name": "Big Room", "capacity": 20 },
+        { "_id": "2", "name": "Small Room", "capacity": 10 }
+    ]
+}
+{
+    "_id": "2", "name": "Medium Theater", "address": "Street 2 #456, south",
+    "rooms": [
+        { "_id": "1", "name": "Big Room", "capacity": 10 },
+        { "_id": "2", "name": "Small Room", "capacity": 5 }
+    ]
+}
+{
+    "_id": "3", "name": "Small Theater", "address": "Street 3 #789, east",
+    "rooms": [
+        { "_id": "1", "name": "Big Room", "capacity": 10 }
+    ]
+}

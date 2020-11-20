@@ -62,14 +62,11 @@ Tickets
     name: string,
     dni: string,
     timestamp: date,
-    show: {
-        showId: string,
-        playId: string,
-        seats: [
-            {
-                seatNumber: integer,
-                price: float
-            }
-        ]
-    }
+    showId: string,
+    playId: string,
+    seats: [
+        {
+            "seatNumber": price
+        }
+    ]
 }

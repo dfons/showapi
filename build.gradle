@@ -19,13 +19,16 @@ dependencies {
 	
 	implementation 'org.springdoc:springdoc-openapi-ui:1.4.8'
 	
+	implementation 'commons-io:commons-io:2.8.0'
+	
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 	testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo'
-	
+
+	testCompile 'org.awaitility:awaitility:4.0.3'
 	testCompile 'com.jayway.jsonpath:json-path'
 }
 

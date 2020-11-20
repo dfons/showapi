@@ -1,5 +1,7 @@
 package com.example.showapi.theater.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -7,6 +9,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
 import com.example.showapi.theater.SectionRepositoryCustom;
+import com.example.showapi.theater.request.SectionBookingRequest;
 import com.example.showapi.theater.request.SectionPatchRequest;
 import com.mongodb.client.result.UpdateResult;
 
@@ -26,6 +29,11 @@ public class SectionRepositoryImpl implements SectionRepositoryCustom {
         UpdateResult updateResult = mongoTemplate.upsert(query, update, "sections");
         
         return (updateResult != null);
+	}
+
+	@Override
+	public Boolean updateSections(List<SectionBookingRequest> requests) {
+		return false;
 	}
 
 }
