@@ -23,6 +23,11 @@ import com.example.showapi.booking.domain.Ticket;
 import com.example.showapi.booking.request.BookingRequest;
 import com.example.showapi.booking.resource.TicketResource;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
@@ -62,6 +67,10 @@ public class BookingController {
 	}
 
 	@PostMapping(path = "", produces = { MediaType.TICKET_RESPONSE }, consumes = { MediaType.BOOKING_REQUEST })
+	@Operation(summary = "Books as set of seats for a show and generates the corresponding ticket.")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "201", content = @Content(schema = @Schema(implementation = TicketResource.class)), description = "Booking accepted and ticket created."),
+			@ApiResponse(responseCode = "406", content = @Content(schema = @Schema(implementation = Void.class)), description = "Booking rejected.") })
 	public ResponseEntity<TicketResource> bookShow(@RequestBody BookingRequest request) {
 		Ticket ticket = bookingService.bookShow(request);
 		if (ticket == null) {

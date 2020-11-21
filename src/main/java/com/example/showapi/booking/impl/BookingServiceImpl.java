@@ -99,7 +99,7 @@ public class BookingServiceImpl implements BookingService {
 		List<Map<Integer, Float>> ticketSeats = new ArrayList<>();
 		Float total = 0.0f;
 		for (Map.Entry<String, List<Integer>> seat : request.getSeats().entrySet()) {
-			Map<Integer, Float> ticketSeatPrices = new HashMap<>();
+
 
 			String setionId = seat.getKey();
 			List<Integer> seatsBySection = seat.getValue();
@@ -108,9 +108,10 @@ public class BookingServiceImpl implements BookingService {
 			total += seatsBySection.size() * priceBySection;
 			
 			for (Integer item : seatsBySection) {
+				Map<Integer, Float> ticketSeatPrices = new HashMap<>();
 				ticketSeatPrices.put(item, priceBySection);
+				ticketSeats.add(ticketSeatPrices);
 			}
-			ticketSeats.add(ticketSeatPrices);
 		}
 		ticket.setSeats(ticketSeats);
 		ticket.setTotal(total);
