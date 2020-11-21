@@ -33,15 +33,9 @@ spring:
     allow-bean-definition-overriding: true
   application:
     name: showapi
-  #cache:
-  #  type: hazelcast
-  #hazelcast:
-  #  config: classpath:config/hazelcast-dev.xml
   data:
     mongodb:
       uri: mongodb://localhost:27017/showapi
-      #username:
-      #password:
 
 springdoc:
   swagger-ui:
