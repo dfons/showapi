@@ -1,6 +1,5 @@
 package com.example.showapi.booking;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -22,12 +21,6 @@ public class BookingControllerTest extends BaseIntegrationTest {
 
 	@Autowired
 	private ObjectMapper objectMapper;
-
-	@Test
-	public void testGetAllEmpty() throws Exception {
-		mvc.perform(get("/api/bookings")).andExpect(status().isOk())
-				.andExpect(jsonPath("$.content").isArray()).andExpect(jsonPath("$.content.length()").value(0));
-	}
 
 	@Test
 	public void testBookShow() throws Exception {
@@ -52,15 +45,14 @@ public class BookingControllerTest extends BaseIntegrationTest {
 		request.setTimestamp(new Date());
 		request.setSeats(sectionAndSeats);
 		
-		final String stringTicket = mvc.perform(post("/api/bookings").content(objectMapper.writeValueAsString(request))
+		mvc.perform(post("/api/bookings").content(objectMapper.writeValueAsString(request))
 				.accept(BookingController.MediaType.TICKET_RESPONSE)
 				.contentType(BookingController.MediaType.BOOKING_REQUEST))
 				.andExpect(status().isCreated()).andExpect(jsonPath("$.name").value(request.getName()))
 				.andExpect(jsonPath("$.dni").value(request.getDni()))
 				.andExpect(jsonPath("$.showId").value(request.getShowId()))
 				.andExpect(jsonPath("$.playId").value(request.getPlayId())).andExpect(jsonPath("$.seats").isArray())
-				.andExpect(jsonPath("$.seats.length()").value(3)).andExpect(jsonPath("$.total").value(290.0f))
-				.andReturn().getResponse().getContentAsString();
+				.andExpect(jsonPath("$.seats.length()").value(3)).andExpect(jsonPath("$.total").value(290.0f));
 
 		// Expected ticket as result:
 		//	    {
@@ -89,6 +81,11 @@ public class BookingControllerTest extends BaseIntegrationTest {
 		//		    }
 		//		  ]
 		//		}
+
+		// If we perform the same booking, it must fail.
+		mvc.perform(post("/api/bookings").content(objectMapper.writeValueAsString(request))
+				.accept(BookingController.MediaType.TICKET_RESPONSE)
+				.contentType(BookingController.MediaType.BOOKING_REQUEST)).andExpect(status().isNotAcceptable());
 
 	}
 
