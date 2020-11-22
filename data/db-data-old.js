@@ -125,6 +125,80 @@ db.sections.drop();
 db.sections.insertMany([
     {
         "_id": "1",
+        "seats": [
+            { "number": 1, "available": true }, { "number": 2, "available": true }, { "number": 3, "available": true }, { "number": 4, "available": true }, { "number": 5, "available": true }
+        ]
+    },
+    {
+        "_id": "2",
+        "seats": [
+            { "number": 6, "available": true }, { "number": 7, "available": true }, { "number": 8, "available": true }, { "number": 9, "available": true }, { "number": 10, "available": true }
+        ]
+    },
+    {
+        "_id": "3",
+        "seats": [
+            { "number": 1, "available": true }, { "number": 2, "available": true }, { "number": 3, "available": true }, { "number": 4, "available": true }, { "number": 5, "available": true }
+        ]
+    },
+    {
+        "_id": "4",
+        "seats": [
+            { "number": 6, "available": true }, { "number": 7, "available": true }, { "number": 8, "available": true }, { "number": 9, "available": true }, { "number": 10, "available": true }
+        ]
+    },
+    {
+        "_id": "5",
+        "seats": [
+            { "number": 11, "available": true }, { "number": 12, "available": true }, { "number": 13, "available": true }, { "number": 14, "available": true }, { "number": 15, "available": true },
+            { "number": 16, "available": true }, { "number": 17, "available": true }, { "number": 18, "available": true }, { "number": 19, "available": true }, { "number": 20, "available": true }
+        ]
+    },
+    {
+        "_id": "6",
+        "seats": [
+            { "number": 1, "available": true }, { "number": 2, "available": true }, { "number": 3, "available": true }, { "number": 4, "available": true }, { "number": 5, "available": true },
+            { "number": 6, "available": true }, { "number": 7, "available": true }, { "number": 8, "available": true }, { "number": 9, "available": true }, { "number": 10, "available": true }
+        ]
+    },
+    {
+        "_id": "7",
+        "seats": [
+            { "number": 11, "available": true }, { "number": 12, "available": true }, { "number": 13, "available": true }, { "number": 14, "available": true }, { "number": 15, "available": true },
+            { "number": 16, "available": true }, { "number": 17, "available": true }, { "number": 18, "available": true }, { "number": 19, "available": true }, { "number": 20, "available": true }
+        ]
+    },
+    {
+        "_id": "8",
+        "seats": [
+            { "number": 1, "available": true }, { "number": 2, "available": true }, { "number": 3, "available": true }, { "number": 4, "available": true }, { "number": 5, "available": true }
+        ]
+    },
+    {
+        "_id": "9",
+        "seats": [
+            { "number": 6, "available": true }, { "number": 7, "available": true }, { "number": 8, "available": true }, { "number": 9, "available": true }, { "number": 10, "available": true }
+        ]
+    },
+    {
+        "_id": "10",
+        "seats": [
+            { "number": 1, "available": true }, { "number": 2, "available": true }, { "number": 3, "available": true }, { "number": 4, "available": true }, { "number": 5, "available": true }
+        ]
+    },
+    {
+        "_id": "11",
+        "seats": [
+            { "number": 1, "available": true }, { "number": 2, "available": true }, { "number": 3, "available": true }, { "number": 4, "available": true }, { "number": 5, "available": true },
+            { "number": 6, "available": true }, { "number": 7, "available": true }, { "number": 8, "available": true }, { "number": 9, "available": true }, { "number": 10, "available": true }
+        ]
+    }
+]);
+
+db.sections2.drop();
+db.sections2.insertMany([
+    {
+        "_id": "1",
         "seats": { "1": true, "2": true, "3": true, "4": true, "5": true }
     },
     {

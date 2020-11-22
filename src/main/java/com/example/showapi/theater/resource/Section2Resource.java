@@ -11,47 +11,50 @@ import org.springframework.hateoas.Link;
 import org.springframework.hateoas.RepresentationModel;
 
 import com.example.showapi.theater.SectionController;
-import com.example.showapi.theater.domain.Seat;
-import com.example.showapi.theater.domain.Section;
 import com.example.showapi.theater.domain.Section2;
 
 public class Section2Resource extends RepresentationModel<Section2Resource> {
 
 	private String id;
-    private HashMap<String, Boolean> seats;
-    
-    public static Section2Resource toResource(Section2 entity) {
+	private HashMap<String, Boolean> seats;
+
+	public static Section2Resource toResource(Section2 entity) {
 		Section2Resource resource = new Section2Resource();
 		resource.setId(entity.getId());
 		resource.setSeats(new HashMap<>(entity.getSeats()));
-		
+
 		Link selfRel = linkTo(SectionController.class).slash(entity.getId()).withSelfRel();
 		resource.add(selfRel);
 		return resource;
 	}
+
 	public static Collection<Section2Resource> toResource(List<Section2> entities) {
 		List<Section2Resource> resources = new ArrayList<>();
 		entities.forEach(entity -> resources.add(toResource(entity)));
 		return resources;
 	}
-    
+
 	public String getId() {
 		return id;
 	}
+
 	public void setId(String id) {
 		this.id = id;
 	}
+
 	public HashMap<String, Boolean> getSeats() {
 		return seats;
 	}
+
 	public void setSeats(HashMap<String, Boolean> seats) {
 		this.seats = seats;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "SectionResource [id=" + id + ", seats=" + seats + "]";
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -60,6 +63,7 @@ public class Section2Resource extends RepresentationModel<Section2Resource> {
 		result = prime * result + ((seats == null) ? 0 : seats.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -81,5 +85,5 @@ public class Section2Resource extends RepresentationModel<Section2Resource> {
 			return false;
 		return true;
 	}
-	
+
 }

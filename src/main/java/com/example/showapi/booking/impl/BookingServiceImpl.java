@@ -20,7 +20,7 @@ import com.example.showapi.show.ShowRepository;
 import com.example.showapi.show.domain.Play;
 import com.example.showapi.show.domain.Play.Price;
 import com.example.showapi.show.domain.Show;
-import com.example.showapi.theater.Section2Repository;
+import com.example.showapi.theater.TheaterService;
 import com.example.showapi.theater.request.SectionBookingRequest;
 
 @Component
@@ -35,7 +35,7 @@ public class BookingServiceImpl implements BookingService {
 	private ShowRepository showRepository;
 
 	@Autowired
-	private Section2Repository sectionRepository;
+	private TheaterService theaterService;
 
 	@Override
 	public Ticket getById(String ticketId) {
@@ -63,11 +63,15 @@ public class BookingServiceImpl implements BookingService {
 			bookings.add(bookingRequest);
 		}
 
-		Boolean result = sectionRepository.updateSections(bookings);
+		// First of all, mark the seats as used.
+		Boolean result = theaterService.updateSections(bookings);
 		if (!result) {
 			return null;
 		}
 
+		// If seats are marked, then create the ticket.
+		// WARNING We are not calling a payment service, that is why this can be done
+		// this way.
 		Ticket ticket = new Ticket();
 		ticket.setDni(request.getDni());
 		ticket.setName(request.getName());
