@@ -1,0 +1,18 @@
+@startuml
+
+interface TheaterRepository
+interface "MongoRepository<Theater,String>" as MongoRepository_Theater_String_
+MongoRepository_Theater_String_ <|-- TheaterRepository
+
+class TheaterController
+TheaterController ..> TheaterService : uses 
+
+interface TheaterService
+class TheaterServiceImpl
+TheaterService <|-- TheaterServiceImpl
+TheaterServiceImpl ..> TheaterRepository : uses
+
+interface SectionRepository
+TheaterServiceImpl ..> SectionRepository : uses
+
+@enduml

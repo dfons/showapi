@@ -1,0 +1,19 @@
+@startuml
+
+interface SectionRepositoryCustom
+interface SectionRepository
+interface "MongoRepository<Section,String>" as MongoRepository_Section_String_
+MongoRepository_Section_String_ <|-- SectionRepository
+SectionRepositoryCustom <|-- SectionRepository
+class SectionRepositoryImpl
+SectionRepository <|-- SectionRepositoryImpl
+
+interface SectionService
+class SectionServiceImpl
+SectionService <|-- SectionServiceImpl
+SectionServiceImpl ..> SectionRepository : uses
+
+class SectionController
+SectionController ..> SectionService: uses
+
+@enduml

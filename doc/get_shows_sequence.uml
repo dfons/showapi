@@ -1,0 +1,70 @@
+@startuml
+
+actor user
+boundary ShowController as C
+
+note left of user: Get all shows
+user -> C : GET /api/shows
+user <- C : 200: {}
+note left of user #green: Get a show by ID
+user -> C : GET /api/shows/1
+alt Show exists
+user <- C : 200: {}
+else Show does not exist
+user <- C : 404: {}
+end
+
+note left of user: Get all theaters
+user -> C : GET /api/theaters
+user <- C : 200: {}
+note left of user #green: Get a theater by ID
+user -> C : GET /api/theaters/1
+alt Theater exists
+user <- C : 200: {}
+else Theater does not exist
+user <- C : 404: {}
+end
+
+note left of user: Get all sections
+user -> C : GET /api/sections
+user <- C : 200: {}
+note left of user #green: Get a section by ID
+user -> C : GET /api/sections/1
+alt Section exists
+user <- C : 200: {}
+else Section does not exist
+user <- C : 404: {}
+end
+
+note left of user: Get all tickets
+user -> C : GET /api/bookings
+user <- C : 200: {}
+note left of user #green: Get a ticket by ID
+user -> C : GET /api/bookings/1
+alt Ticket exists
+user <- C : 200: {}
+else Ticket does not exist
+user <- C : 404: {}
+end
+
+newpage
+
+note left of user: Get show with ID 1
+user -> C : GET /api/shows/1
+user <-- C : 200: {}
+
+note left of user: Once the show is obtained\nwith its plays, the sections\nmust be queried
+loop For each section
+    user -> C : GET /api/sections/1
+    user <-- C : 200: {}
+end
+
+note left of user: Now the show can be\nbooked.
+user -> C : POST /api/bookings {}
+alt Show booked
+user <-- C : 201: {}
+else Booking rejected
+user <-- C : 406: {}
+end
+
+@enduml

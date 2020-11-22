@@ -1,0 +1,19 @@
+@startuml
+
+interface ShowRepositoryCustom
+interface ShowRepository
+interface "MongoRepository<Show,String>" as MongoRepository_Show_String_
+MongoRepository_Show_String_ <|-- ShowRepository
+ShowRepositoryCustom <|-- ShowRepository
+class ShowRepositoryImpl
+ShowRepository <|-- ShowRepositoryImpl
+
+interface ShowService
+class ShowServiceImpl
+ShowService <|-- ShowServiceImpl
+ShowServiceImpl ..> ShowRepository : uses
+
+class ShowController
+ShowController ..> ShowService: uses
+
+@enduml

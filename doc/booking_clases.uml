@@ -1,0 +1,21 @@
+@startuml
+
+interface BookingRepository
+interface "MongoRepository<Ticket,String>" as MongoRepository_Ticket_String_
+MongoRepository_Ticket_String_ <|-- BookingRepository
+
+interface BookingService
+class BookingServiceImpl
+BookingService <|-- BookingServiceImpl
+BookingServiceImpl ..> BookingRepository : uses
+
+interface SectionRepository
+BookingServiceImpl ..> SectionRepository : uses
+
+interface ShowRepository
+BookingServiceImpl ..> ShowRepository : uses
+
+class BookingController
+BookingController ..> BookingService : uses 
+
+@enduml
