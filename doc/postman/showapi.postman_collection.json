@@ -1,0 +1,210 @@
+{
+	"info": {
+		"_postman_id": "8247c63a-c4f4-415c-9394-0f99292e1755",
+		"name": "showapi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/sections",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/sections/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"sections",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/sections",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/section-requesst-v1-hal+json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"seatNumber\": 1,\n    \"seatStatus\": false\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/sections/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"sections",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/shows",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/shows/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"shows",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/shows/find",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/shows/find?sortBy=name&order=desc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"shows",
+						"find"
+					],
+					"query": [
+						{
+							"key": "dateFrom",
+							"value": "2020-11-15T16:00:00Z",
+							"disabled": true
+						},
+						{
+							"key": "dateTo",
+							"value": "2020-11-15T17:00:00Z",
+							"disabled": true
+						},
+						{
+							"key": "priceFrom",
+							"value": "60",
+							"disabled": true
+						},
+						{
+							"key": "priceTo",
+							"value": "80",
+							"disabled": true
+						},
+						{
+							"key": "sortBy",
+							"value": "name"
+						},
+						{
+							"key": "order",
+							"value": "desc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/theaters",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/theaters/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"theaters",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/bookings",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/bookings",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"bookings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/bookings",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/booking-request-v1-hal+json",
+						"type": "text"
+					},
+					{
+						"key": "acc",
+						"value": "application/ticket-response-v1-hal+json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Diego Fons\",\n\t\"dni\": \"28142035\",\n\t\"timestamp\": \"2020-11-18T15:00:00Z\",\n\t\"showId\": \"1\",\n\t\"playId\": \"1\",\n\t\"seats\": {\n        \"1\": [1],\n        \"2\": [6]\n    }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/bookings",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"bookings"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
