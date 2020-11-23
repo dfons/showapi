@@ -2,6 +2,11 @@
 
 actor user
 boundary ShowController as C
+control ShowService as S
+entity Cache as cache
+database Database as DB
+boundary TheaterController as T
+boundary BookingController as B
 
 note left of user: Get all shows
 user -> C : GET /api/shows
@@ -51,20 +56,30 @@ newpage
 
 note left of user: Get show with ID 1
 user -> C : GET /api/shows/1
-user <-- C : 200: {}
+    C -> S : getShowById()
+        S -> cache : getShowById()
+        alt Show is cached
+        S <-- cache : Show
+        else Show is outdated
+        cache -> DB : loadShow()
+        cache <-- DB : Show
+        S <-- cache : Show
+        end
+    C <-- S : Show
+user <-- C : 200: {response}
 
 note left of user: Once the show is obtained\nwith its plays, the sections\nmust be queried
 loop For each section
-    user -> C : GET /api/sections/1
-    user <-- C : 200: {}
+    user -> T : GET /api/sections/{sectionId}
+    user <-- T : 200: {response}
 end
 
 note left of user: Now the show can be\nbooked.
-user -> C : POST /api/bookings {}
+user -> B : POST /api/bookings {request}
 alt Show booked
-user <-- C : 201: {}
+user <-- B : 201: {response}
 else Booking rejected
-user <-- C : 406: {}
+user <-- B : 406: {}
 end
 
 @enduml
