@@ -74,6 +74,8 @@ $ docker run -e "SPRING_DATA_MONGODB_URI=<yourUri>" -p "8080:8080" -d dfons/show
 
 In this case we must forward the service port in order to reach the service through **localhost** (it is more convenient, not necessary).
 
+**NOTE:** The tag `latest` for the OCI image is not provided. The latest image has the tag `0.0.2-SNAPSHOT`.
+
 ## Usage
 You can read the sequence diagram in order to understand how the service is used. Basically, you can query all collections by a particular ID or retrieve every document. When you request all documents from a collection, the response is paged and you can control the paging process by providing the query parameters `page` and `size` which define the page number and the size of each page. The only endpoint that accepts additional query parameters is the one that finds shows `/api/shows/find`, the query parameters are as follow:
 * `dateFrom`: Indicates the start date for a search by date.
